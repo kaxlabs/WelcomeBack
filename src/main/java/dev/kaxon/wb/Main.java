@@ -14,7 +14,7 @@ public final class Main extends JavaPlugin {
         INSTANCE = this;
         createConfig();
         getServer().getPluginManager().registerEvents(new JoinListener(), this);
-        getCommand("wb").setExecutor(new WBCommand());
+        getCommand("welcomeback").setExecutor(new WBCommand());
     }
 
     @Override
@@ -22,7 +22,8 @@ public final class Main extends JavaPlugin {
     }
     
     private void createConfig() {
-        config.addDefault("welcome-message", "Welcome back, %player%!");
+        config.addDefault("first-join-message", "Welcome, %player%!");
+        config.addDefault("welcome-back-message", "Welcome back, %player%!");
         config.options().copyDefaults(true);
         saveConfig();
     }

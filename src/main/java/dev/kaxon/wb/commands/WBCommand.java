@@ -2,9 +2,6 @@ package dev.kaxon.wb.commands;
 
 import dev.kaxon.wb.Main;
 import dev.kaxon.wb.listeners.JoinListener;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -36,7 +33,12 @@ public class WBCommand implements CommandExecutor {
             sender.sendMessage(ChatColor.GRAY + "No player has joined yet.");
             return true;
         }
-        String message = Objects.requireNonNull(Main.INSTANCE.getConfig().getString("welcome-message")).replaceAll("%player%", JoinListener.getLastPlayer().getName());
+        String message;
+        if (!JoinListener.getLastPlayer().hasPlayedBefore()) {
+            message = Objects.requireNonNull(Main.INSTANCE.getConfig().getString("first-join-message")).replaceAll("%player%", JoinListener.getLastPlayer().getName());
+        } else {
+            message = Objects.requireNonNull(Main.INSTANCE.getConfig().getString("welcome-back-message")).replaceAll("%player%", JoinListener.getLastPlayer().getName());
+        }
         if (player.getUniqueId() == JoinListener.getLastPlayer().getUniqueId()) {
             sender.sendMessage(message);
             return true;
