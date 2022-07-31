@@ -1,0 +1,15 @@
+name: WelcomeBack
+version: '${version}'
+main: dev.kaxon.wb.Main
+api-version: 1.19
+authors: [ Kaxon ]
+description: Auto welcomes the most recent player to join
+commands:
+  reload:
+    description: Reloads the plugin
+    usage: /wb reload
+  welcomeback:
+    description: Auto welcomes the most recent player to join
+    usage: /wb
+    aliases: [ wb ]
+    permission: welcomeback.use
